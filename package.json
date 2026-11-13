@@ -1,0 +1,22 @@
+{
+  "name": "moores-nim",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Moore's Nim_k (lower up to k piles per move) and Exact k-Nim (lower exactly k piles) in the browser, with exact solvers, the Jenkyns–Mayberry formula, the Tetris function, and the checkable claims of Boros–Gurvich–Ho–Makino–Mursič (2017) and Boros–Gurvich–Kitrossky–Makino (2019) recomputed by exhaustive search. TypeScript, no runtime deps.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "serve": "vite preview --port 4173",
+    "test": "vitest run",
+    "verify": "node tools/verify.mts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.1",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.5"
+  },
+  "license": "MIT"
+}

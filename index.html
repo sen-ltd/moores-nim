@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moore's Nim and Exact k-Nim — solved, with the Jenkyns–Mayberry formula</title>
+    <meta
+      name="description"
+      content="Moore's Nim_k (lower up to k piles per move) and Exact k-Nim (lower exactly k piles) against an exact solver: Moore's base-(k+1) rule, the Jenkyns–Mayberry Sprague–Grundy formula, the Tetris function, and every checkable claim of Boros–Gurvich–Ho–Makino–Mursič recomputed by exhaustive search."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23141518'/%3E%3Crect x='6' y='14' width='5' height='12' rx='2' fill='%23d9b45a'/%3E%3Crect x='13.5' y='8' width='5' height='18' rx='2' fill='%235b606a'/%3E%3Crect x='21' y='18' width='5' height='8' rx='2' fill='%23d9b45a'/%3E%3C/svg%3E"
+    />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Moore's Nim <span>lower up to k piles at once</span></h1>
+        <p class="sub">
+          <em>n</em> piles of tokens. A move lowers <strong>up to <em>k</em></strong> piles (Moore 1910) — or, in
+          <strong>Exact k-Nim</strong>, <strong>exactly <em>k</em></strong> piles — each by any positive amount.
+          Whoever moves last wins. Moore's rule: write the piles in binary and add each column
+          <strong>mod k+1</strong>; you are lost exactly when every column is 0. The Sprague–Grundy value is much
+          harder: the base-(k+1) number M(x) is <em>not</em> it (Berge got this wrong), and an exact formula is known
+          only for <em>n</em> = <em>k</em>+1 (Jenkyns–Mayberry 1980) and, for Exact k-Nim, <em>n</em> ≤ 2<em>k</em>.
+          Click a token to lower that pile to just below it, pick up to <em>k</em> piles, then <strong>Move</strong>.
+        </p>
+      </header>
+
+      <div id="wrap">
+        <div class="stage">
+          <h3>play <span class="dim">against the solver</span></h3>
+          <div class="panel">
+            <div class="controls">
+              <label class="sel">game <select id="kind">
+                <option value="moore">Moore's Nim (≤ k piles)</option>
+                <option value="exact">Exact k-Nim (= k piles)</option>
+              </select></label>
+              <label class="sel">n <select id="nSel"></select></label>
+              <label class="sel">k <select id="kSel"></select></label>
+              <button id="random">New position</button>
+              <label class="sel chk"><input type="checkbox" id="hints" checked /> hints</label>
+              <label class="sel chk"><input type="checkbox" id="cpu" checked /> computer replies</label>
+            </div>
+            <div id="piles"></div>
+            <div class="controls after">
+              <button id="move" class="primary">Move</button>
+              <button id="clear">Clear selection</button>
+              <button id="best">Show a winning move</button>
+              <button id="undo">Undo</button>
+            </div>
+            <div id="status" aria-live="polite"></div>
+          </div>
+
+          <h3 id="whyHead">why: <span class="dim" id="whySub"></span></h3>
+          <div class="panel" id="why"></div>
+
+          <h3>Sprague–Grundy value vs Berge's M(x) <span class="dim">— Moore's Nim, n = 3, k = 2, first pile fixed</span></h3>
+          <div class="panel">
+            <div class="controls">
+              <label class="sel">first pile <input type="range" id="zIn" min="0" max="8" value="0" /> <b id="zOut">0</b></label>
+              <span class="small dim">hover a cell</span>
+            </div>
+            <div class="maps">
+              <figure><canvas id="mapG" width="360" height="360"></canvas><figcaption>true SG value G(x) — exhaustive search</figcaption></figure>
+              <figure><canvas id="mapM" width="360" height="360"></canvas><figcaption>Berge's claim: G(x) = M(x)</figcaption></figure>
+            </div>
+            <p class="small dim" id="mapNote"></p>
+          </div>
+        </div>
+
+        <div class="side">
+          <h3>paper check <span class="dim" id="checkHead"></span></h3>
+          <div class="panel" id="checks"></div>
+          <h3>open case: Exact k-Nim with n &gt; 2k</h3>
+          <div class="panel">
+            <table id="open"></table>
+            <p class="small dim">No formula is known, not even for the P-positions of Nim=<sub>5,2</sub>. Share of positions where the n ≤ 2k formulas still happen to give the right SG value.</p>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <a href="https://github.com/sen-ltd/moores-nim">source</a> · MIT · <a href="https://sen.ltd/">SEN LLC</a>
+      </footer>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

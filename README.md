@@ -56,3 +56,10 @@ npm run build
 ## License
 
 MIT © 2026 SEN LLC
+
+<!-- sen-publish:links -->
+## Links
+
+- 🌐 Demo: https://sen.ltd/portfolio/moores-nim/
+- 📝 記事: https://qiita.com/sen-ltd/items/e5a0b2f01af7082264f0
+<!-- /sen-publish:links -->

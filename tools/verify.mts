@@ -51,7 +51,7 @@ for (const [n, k, B] of mooreCfg) {
     if ((G === 1) !== (M === 1)) oneBad++;
     if (G === 0) rowP++;
     if (G !== M) { rowNe++; bergeNe++; }
-    if (G === M && G >= 2 && k >= 2) {
+    if (G === M && G >= 2 && k >= 2 && k < n) {
       rowEqHigh++; eqHigh++;
       if (!eqHighExample || sum(x) < sum(eqHighExample)) { eqHighExample = x; eqHighK = k; eqHighG = G; }
     }
@@ -87,7 +87,7 @@ add('berge-examples', 'BGHMM §1', '2 = G(x) < M(x) = 3 for x = (0,0,2) and 8 = 
   `G(0,0,2) = ${ex1}, M = ${mooreM([0, 0, 2], 2)}; G(2,3,3) = ${ex2}, M = ${mooreM([2, 3, 3], 2)}`);
 add('only-when', 'BGHMM §1', '"the equality [G = M] holds only when M(x) ≤ 1 or G(x) ≤ 1"',
   eqHigh === 0,
-  `as worded, false: with k ≥ 2, G = M ≥ 2 at ${fmt(eqHigh)} positions, the smallest being (${eqHighExample?.join(',')}) with G = M = ${eqHighG} (n = ${eqHighExample?.length}, k = ${eqHighK}). What JM proved is the "if" direction: M ≤ 1 or G ≤ 1 implies G = M`);
+  `as worded, false: with 2 ≤ k < n, G = M ≥ 2 at ${fmt(eqHigh)} positions, the smallest being (${eqHighExample?.join(',')}) with G = M = ${eqHighG} (n = ${eqHighExample?.length}, k = ${eqHighK}). What JM proved is the "if" direction: M ≤ 1 or G ≤ 1 implies G = M`);
 add('jm-formula', 'Jenkyns–Mayberry 1980 (BGKM eq. (1)–(2), h = Σx)', 'SG of Nim≤_{k+1,k} = U(m, Σx − n·m, Σx)',
   jmBad === 0, `${fmt(jmTried)} positions (n = 3..6, k = n−1): ${jmBad} exceptions. Like Theorem 2 it needs k ≥ 2: at n = 2, k = 1 (2-pile Nim) it misses ${fmt(jmK1Bad)} of ${fmt(jmK1Tried)}, first at (3,1): U = 4, G = 2`);
 add('jm-only-k+1', 'BGHMM abstract', 'the JM formula is for n = k+1 only',

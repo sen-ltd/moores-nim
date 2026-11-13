@@ -13,7 +13,7 @@ There are *n* piles of tokens. A move lowers **1 to *k*** piles (Moore's Nim, E.
   - Exact k-Nim with *n* = 2*k*: a formula of Boros–Gurvich–Ho–Makino–Mursič. It is the Jenkyns–Mayberry formula again, with T in place of Σx.
 
   The demo uses each formula where it applies. For Exact k-Nim with *n* > 2*k*, where the problem is open, it uses memoised search instead.
-- **Paper check.** `npm run verify` solves every position with piles up to a bound B in 26 games, using one forward sweep in mixed radix (about 30 s). It then checks 23 statements, listed below.
+- **Paper check.** `npm run verify` solves every position with piles up to a bound B in 28 games, using one forward sweep in mixed radix (about 45 s). It then checks 23 statements, listed below.
 
 ## What the check finds
 
@@ -28,7 +28,7 @@ All statements were transcribed from the TeX sources.
 |---|---|
 | Moore: P-positions are exactly M(x) = 0; JM: 1-positions are exactly M(x) = 1 (BGHMM Theorem 3) | 0 exceptions in 310,950 positions across 14 Moore games, n ≤ 6 |
 | Berge's G = M is an overstatement; G(0,0,2) = 2 < M = 3, G(2,3,3) = 8 > M = 2 | confirmed. For k ≥ 2, G ≠ M is the norm: with n = 3, k = 2, G = M holds at only 233 of 68,921 positions |
-| "the equality holds **only when** M(x) ≤ 1 or G(x) ≤ 1" | **false as worded**. With k ≥ 2 there are 3,123 positions where G = M ≥ 2; the smallest is (0,1,1), with G = M = 2. The statement holds in the "if" direction only |
+| "the equality holds **only when** M(x) ≤ 1 or G(x) ≤ 1" | **false as worded**. With 2 ≤ k < n there are 3,112 positions where G = M ≥ 2; the smallest is (0,1,1), with G = M = 2. The statement holds in the "if" direction only |
 | Jenkyns–Mayberry formula for Nim≤<sub>k+1,k</sub> (BGKM eq. (1)–(2), h = Σx) | 0 exceptions in 129,914 positions with n = 3..6. Like BGHMM Theorem 2, it needs k ≥ 2: in 2-pile Nim it is wrong at 3,272 of 4,096 positions |
 | the formula is for n = k+1 only | it fails in every other Moore game tried |
 | BGHMM Theorem 1: n < 2k gives G = T | 0 exceptions in 306,737 positions across 6 games |
@@ -47,7 +47,7 @@ For the open case, Exact k-Nim with n > 2k, the report lists the P-positions of 
 npm install
 npm run dev        # demo at http://localhost:5173/portfolio/moores-nim/
 npm test           # 12 tests
-npm run verify     # paper check (about 30 s), writes runs/verify.json
+npm run verify     # paper check (about 45 s), writes runs/verify.json
 npm run build
 ```
 
